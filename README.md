@@ -46,3 +46,21 @@ situations.
 **finding** problems; so don't overthink.
 - If used in a correct place in a correct manner, they can prove to be a savior;
 or else they can result in a horrible mess of a code.
+
+## Types of Design Patterns
+
+* [Creational](#creational-design-patterns)
+* [Structural](#structural-design-patterns)
+* [Behavioral](#behavioral-design-patterns)
+
+## Creational Design Patterns
+
+TODO
+
+## Structural Design Patterns
+
+TODO
+
+## Behavioral Design Patterns
+
+TODO
