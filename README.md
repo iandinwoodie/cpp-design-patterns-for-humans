@@ -8,9 +8,13 @@
 A topic that can easily make anyone's mind wobble. Here I try to make them stick
 in to your mind (and maybe mine) by explaining them in the <i>simplest</i> way
 possible. 
-<br/>
-Based on <a href="https://github.com/kamranahmedse/design-patterns-for-humans">
-"Design Patterns for Humans"</a>
+</p>
+<p align="center">
+This work, "C++ Design Patterns for Humans, is a derivative of
+<a href="https://github.com/kamranahmedse/design-patterns-for-humans">
+"Design Patterns for Humans"</a> by <a href="https://github.com/kamranahmedse">
+"kamranahmedse", used under
+<a href=https://creativecommons.org/licenses/by/4.0/">"CC BY 4.0".
 </p>
 
 ***
