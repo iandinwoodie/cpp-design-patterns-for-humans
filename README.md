@@ -14,7 +14,7 @@ This work, "C++ Design Patterns for Humans", is a derivative of
 <a href="https://github.com/kamranahmedse/design-patterns-for-humans">
 "Design Patterns for Humans"</a> by <a href="https://github.com/kamranahmedse">
 "kamranahmedse"</a>, used under
-<a href=https://creativecommons.org/licenses/by/4.0/">"CC BY 4.0"</a>.
+<a href=https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 </p>
 
 ***
