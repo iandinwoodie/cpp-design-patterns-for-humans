@@ -37,3 +37,12 @@ given context in software design. It is not a finished design that can be
 transformed directly into source or machine code. It is a description or
 template for how to solve a problem that can be used in many different
 situations.
+
+### ⚠️ Be Careful
+
+- Design patterns are not a silver bullet to all your problems.
+- Do not try to force them; bad things are supposed to happen, if done so. 
+- Keep in mind that design patterns are solutions **to** problems, not solutions 
+**finding** problems; so don't overthink.
+- If used in a correct place in a correct manner, they can prove to be a savior;
+or else they can result in a horrible mess of a code.
