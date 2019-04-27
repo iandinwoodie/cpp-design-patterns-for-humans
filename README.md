@@ -1,4 +1,4 @@
-![C++ Design Patterns for Humans](https://user-images.githubusercontent.com/20260845/56855872-5c98da00-691d-11e9-8a1e-e53f17de7bb5.png)
+![C++ Design Patterns for Humans](https://user-images.githubusercontent.com/20260845/56855972-fb720600-691e-11e9-9efc-4755d6b4cb5b.png)
 
 ***
 <p align="center">
