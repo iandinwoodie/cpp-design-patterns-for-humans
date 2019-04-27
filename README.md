@@ -1,6 +1,7 @@
 ![C++ Design Patterns for Humans](https://user-images.githubusercontent.com/20260845/56855972-fb720600-691e-11e9-9efc-4755d6b4cb5b.png)
 
-***
+---
+
 <p align="center">
 🎉 Ultra-simplified explanation to design patterns! 🎉
 </p>
@@ -17,4 +18,22 @@ This work, "C++ Design Patterns for Humans", is a derivative of
 <a href=https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 </p>
 
-***
+---
+
+## Introduction
+
+Design patterns are solutions to recurring problems; **guidelines for how to
+tackle certain problems**. They are not classes, packages, or libraries that
+you can plug into your application and wait for the magic to happen. These are,
+rather, guidelines on how to tackle certain problems in certain situations.
+
+> Design patterns are solutions to recurring problems; guidelines for how to
+tackle certain problems.
+
+Wikipedia describes design patterns as:
+
+> [...] a general reusable solution to a commonly occurring problem within a
+given context in software design. It is not a finished design that can be
+transformed directly into source or machine code. It is a description or
+template for how to solve a problem that can be used in many different
+situations.
