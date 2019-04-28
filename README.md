@@ -425,5 +425,8 @@ All content of this file, unless otherwise noted, is licensed as follows:
 
 - All provided source code examples are covered by the
 [MIT License](https://github.com/idinwoodie/cpp-design-patterns-for-humans/blob/master/LICENSE).
+- The C++ badge that appears in the banner image was created by
+[Jeremy Kratz](https://jeremykratz.com/) and is licensed by
+[The Standard C++ Foundation](https://isocpp.org/home/terms-of-use).
 - Other content, including images, is released under the
 [Creative Common Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
