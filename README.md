@@ -157,8 +157,8 @@ Door door = DoorFactor::makeDoor(100, 200);
 printf("Width: %f\n", door.getWidth());
 printf("Height: %f\n", door.getHeight());
 
-\\ Make another door with dimensions 50x100.
-Door smallDoor = DoorFactor::makeDoor(50, 100);
+\\ We can use the factory again to make a door with dimensions 50x100.
+Door door2 = DoorFactor::makeDoor(50, 100);
 ```
 
 #### When To Use
