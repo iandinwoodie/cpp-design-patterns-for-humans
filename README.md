@@ -885,14 +885,13 @@ Real world example:
 
 > Suppose we are getting some house built. The steps for building might look
 like:
-- Prepare the base of house
-- Build the walls
-- Add roof
-- Add other floors
-
+> - Prepare the base of house
+> - Build the walls
+> - Add roof
+> - Add other floors
 > The order of these steps could never be changed i.e. you can't build the roof
- before building the walls etc but each of the steps could be modified for
- example walls can be made of wood or polyester or stone.
+before building the walls etc but each of the steps could be modified for
+example walls can be made of wood or polyester or stone.
 
 In plain words:
 
