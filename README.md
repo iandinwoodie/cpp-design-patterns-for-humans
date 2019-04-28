@@ -151,13 +151,13 @@ class DoorFactory
 Here is how this can be used:
 
 ```cpp
-\\ Make a door with dimensions 100x200.
+// Make a door with dimensions 100x200.
 Door door = DoorFactory::makeDoor(100, 200);
 
 std::cout << "Width: " << door.getWidth() << std::endl;
 std::cout << "Height: " << door.getHeight() << std::endl;
 
-\\ We can use the factory again to make a door with dimensions 50x100.
+// We can use the factory again to make a door with dimensions 50x100.
 Door door2 = DoorFactory::makeDoor(50, 100);
 ```
 
@@ -264,10 +264,10 @@ Here is how this can be used:
 
 ```cpp
 DevelopmentManager developmentManager = DevelopmentManager();
-developmentManager.takeInterview(); // Output: Asking about design patterns!
+developmentManager.takeInterview(); \\ Output: Asking about design patterns!
 
 MarketingManager marketingManager = MarketingManager();
-marketingManager.takeInterview(); // Output: Asking about community building!
+marketingManager.takeInterview(); \\ Output: Asking about community building!
 ```
 
 #### When To Use
@@ -409,15 +409,15 @@ DoorFactory woodenFactory = WoodenDoorFactory();
 Door door = woodenFactory.makeDoor();
 DoorFittingExpert expert = woodenFactory.makeFittingExpert();
 
-door.getDescription(); // Output: I am a wooden door.
-expert.getDescription(); // Output: I can only fit wooden doors.
+door.getDescription(); \\ Output: I am a wooden door.
+expert.getDescription(); \\ Output: I can only fit wooden doors.
 
 DoorFactory ironFactory = IronDoorFactory();
 Door door = ironFactory.makeDoor();
 DoorFittingExpert expert = woodenFactory.makeFittingExpert();
 
-door.getDescription(); // Output: I am an iron door.
-expert.getDescription(); // Output: I can only fit iron doors.
+door.getDescription(); \\ Output: I am an iron door.
+expert.getDescription(); \\ Output: I can only fit iron doors.
 ```
 
 As you can see the wooden door factory has encapsulated the carpenter and the
