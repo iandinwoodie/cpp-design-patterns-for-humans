@@ -313,6 +313,8 @@ entities.
 
 ### 🔌 Adapter
 
+#### Overview
+
 Real world example:
 
 > Consider that you have some pictures in your memory card and you need to
