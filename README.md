@@ -152,13 +152,13 @@ Here is how this can be used:
 
 ```cpp
 \\ Make a door with dimensions 100x200.
-Door door = DoorFactor::makeDoor(100, 200);
+Door door = DoorFactory::makeDoor(100, 200);
 
 printf("Width: %f\n", door.getWidth());
 printf("Height: %f\n", door.getHeight());
 
 \\ We can use the factory again to make a door with dimensions 50x100.
-Door door2 = DoorFactor::makeDoor(50, 100);
+Door door2 = DoorFactory::makeDoor(50, 100);
 ```
 
 #### When To Use
@@ -302,7 +302,128 @@ classes.
 
 #### Programmatic Example
 
-TODO
+Translating the door example above. First of all we have our door base class and
+some derivation of it:
+
+```cpp
+class Door
+{
+  public:
+    virtual void getDescription(void) = 0;
+};
+
+class WoodenDoor : public Door
+{
+  public:
+    void getDescription(void)
+    {
+      std::cout << "I am a wooden door." << std::endl;
+    }
+};
+
+class IronDoor : public Door
+{
+  public:
+    void getDescription(void)
+    {
+      std::cout << "I am an iron door." << std::endl;
+    }
+};
+```
+
+Then we have some fitting experts for each door type:
+
+```cpp
+class DoorFittingExpert
+{
+  public:
+    virtual void getDescription(void) = 0;
+};
+
+class Welder : public DoorFittingExpert
+{
+  public:
+    void getDescription(void)
+    {
+      std::cout << "I can only fit iron doors." << std::endl;
+    }
+};
+
+class Carpenter : public DoorFittingExpert
+{
+  public:
+    void getDescription(void)
+    {
+      std::cout << "I can only fit wooden doors." << std::endl;
+
+    }
+};
+```
+
+Now we have our abstract factory that would let us make family of related
+objects i.e. wooden door factory would create a wooden door and wooden door
+fitting expert and iron door factory would create an iron door and iron door
+fitting expert:
+
+```cpp
+class DoorFactory
+{
+  public:
+    virtual Door makeDoor(void) = 0;
+    virtual DoorFittingExpert makeFittingExpert(void) = 0;
+};
+
+class WoodenDoorFactory : public DoorFactory
+{
+  public:
+    Door makeDoor(void)
+    {
+      return WoodenDoor();
+    }
+
+    DoorFittingExpert makeFittingExpert(void)
+    {
+      return Carpenter;
+    }
+};
+
+class IronDoorFactory : public DoorFactory
+{
+  public:
+    Door makeDoor(void)
+    {
+      return IronDoor();
+    }
+
+    DoorFittingExpert makeFittingExpert(void)
+    {
+      return Welder();
+    }
+};
+```
+
+Here is how this can be used:
+
+```cpp
+DoorFactory woodenFactory = WoodenDoorFactory();
+Door door = woodenFactory.makeDoor();
+DoorFittingExpert expert = woodenFactory.makeFittingExpert();
+
+door.getDescription(); // Output: I am a wooden door.
+expert.getDescription(); // Output: I can only fit wooden doors.
+
+DoorFactory ironFactory = IronDoorFactory();
+Door door = ironFactory.makeDoor();
+DoorFittingExpert expert = woodenFactory.makeFittingExpert();
+
+door.getDescription(); // Output: I am an iron door.
+expert.getDescription(); // Output: I can only fit iron doors.
+```
+
+As you can see the wooden door factory has encapsulated the carpenter and the
+wooden door also iron door factory has encapsulated the iron door and welder.
+And thus it had helped us make sure that for each of the created door, we do not
+get a wrong fitting expert.
 
 #### When To Use
 
