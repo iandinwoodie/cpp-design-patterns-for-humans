@@ -108,6 +108,7 @@ First of all we have a door base class and a wooden door derived class:
 class Door
 {
   public:
+    typedef std::shared_ptr<Door> ptr_t;
     virtual float getWidth(void) = 0;
     virtual float getHeight(void) = 0;
 };
@@ -141,10 +142,11 @@ Then we have our door factory that makes the door and returns it:
 ```cpp
 class DoorFactory
 {
-  static Door makeDoor(float width, float height)
-  {
-    return WoodenDoor(width, height);
-  }
+  public:
+    static Door::ptr_t makeDoor(float width, float height)
+    {
+      return std::make_shared<WoodenDoor>(width, height);
+    }
 };
 ```
 
@@ -152,13 +154,20 @@ Here is how this can be used:
 
 ```cpp
 // Make a door with dimensions 100x200.
-Door door = DoorFactory::makeDoor(100, 200);
+Door::ptr_t door = DoorFactory::makeDoor(100, 200);
 
-std::cout << "Width: " << door.getWidth() << std::endl;
-std::cout << "Height: " << door.getHeight() << std::endl;
+// Output: width = 100
+std::cout << "width = " << door->getWidth() << std::endl;
+// Output: height = 200
+std::cout << "height = " << door->getHeight() << std::endl;
 
 // We can use the factory again to make a door with dimensions 50x100.
-Door door2 = DoorFactory::makeDoor(50, 100);
+Door::ptr_t door2 = DoorFactory::makeDoor(50, 100);
+
+// Output: width = 50
+std::cout << "width = " << door2->getWidth() << std::endl;
+// Output: height = 100
+std::cout << "height = " << door2->getHeight() << std::endl;
 ```
 
 #### When To Use
