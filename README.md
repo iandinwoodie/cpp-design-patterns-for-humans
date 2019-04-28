@@ -889,6 +889,7 @@ like:
 > - Build the walls
 > - Add roof
 > - Add other floors
+>
 > The order of these steps could never be changed i.e. you can't build the roof
 before building the walls etc but each of the steps could be modified for
 example walls can be made of wood or polyester or stone.
