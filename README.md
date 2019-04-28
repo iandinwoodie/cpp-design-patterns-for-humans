@@ -154,8 +154,8 @@ Here is how this can be used:
 \\ Make a door with dimensions 100x200.
 Door door = DoorFactory::makeDoor(100, 200);
 
-printf("Width: %f\n", door.getWidth());
-printf("Height: %f\n", door.getHeight());
+std::cout << "Width: " << door.getWidth() << std::endl;
+std::cout << "Height: " << door.getHeight() << std::endl;
 
 \\ We can use the factory again to make a door with dimensions 50x100.
 Door door2 = DoorFactory::makeDoor(50, 100);
