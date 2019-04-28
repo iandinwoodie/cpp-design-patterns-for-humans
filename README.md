@@ -208,6 +208,7 @@ interface and some implementations for it:
 class Interviewer
 {
   public:
+    typedef std::shared_ptr<Interviewer> ptr_t;
     virtual void askQuestions(void) = 0;
 };
 
@@ -238,12 +239,12 @@ class HiringManager
   public:
     void takeInterview(void)
     {
-      interviewer = makeInterviewer();
-      interviewer.askQuestions();
+      Interviewer::ptr_t interviewer = makeInterviewer();
+      interviewer->askQuestions();
     }
 
   protected:
-    virtual Interviewer makeInterviewer(void) = 0;
+    virtual Interviewer::ptr_t makeInterviewer(void) = 0;
 };
 ```
 
@@ -253,18 +254,18 @@ Now any child can extend it and provide the required interviewer:
 class DevelopmentManager : public HiringManager
 {
   protected:
-    Interviewer makeInterviewer(void)
+    Interviewer::ptr_t makeInterviewer(void)
     {
-      return Developer();
+      return std::make_shared<Developer>();
     }
 };
 
 class MarketingManager : public HiringManager
 {
   protected:
-    Interviewer makeInterviewer(void)
+    Interviewer::ptr_t makeInterviewer(void)
     {
-      return CommunityExecutive();
+      return std::make_shared<CommunityExecutive>();
     }
 };
 ```
@@ -273,10 +274,10 @@ Here is how this can be used:
 
 ```cpp
 DevelopmentManager developmentManager = DevelopmentManager();
-developmentManager.takeInterview(); \\ Output: Asking about design patterns!
+developmentManager.takeInterview(); // Output: Asking about design patterns!
 
 MarketingManager marketingManager = MarketingManager();
-marketingManager.takeInterview(); \\ Output: Asking about community building!
+marketingManager.takeInterview(); // Output: Asking about community building!
 ```
 
 #### When To Use
