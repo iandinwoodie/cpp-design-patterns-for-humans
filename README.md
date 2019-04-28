@@ -102,7 +102,64 @@ of a varying prototype or class from some method call, which is assumed to be
 
 #### Programmatic Example
 
-TODO
+First of all we have a door base class and a wooden door derived class:
+
+```cpp
+class Door
+{
+  public:
+    virtual float getWidth(void) = 0;
+    virtual float getHeight(void) = 0;
+};
+
+class WoodenDoor : public Door
+{
+  public:
+    WoodenDoor(float width, float height)
+        : width_(width), height_(height)
+    {
+    }
+
+    float getWidth(void)
+    {
+      return width_;
+    }
+
+    float getHeight(void)
+    {
+      return height_;
+    }
+
+  private:
+    float width_;
+    float height_;
+};
+```
+
+Then we have our door factory that makes the door and returns it:
+
+```cpp
+class DoorFactory
+{
+  static Door makeDoor(float width, float height)
+  {
+    return WoodenDoor(width, height);
+  }
+};
+```
+
+This can be used like so:
+
+```cpp
+\\ Make a door with dimensions 100x200.
+Door door = DoorFactor::makeDoor(100, 200);
+
+printf("Width: %f\n", door.getWidth());
+printf("Height: %f\n", door.getHeight());
+
+\\ Make another door with dimensions 50x100.
+Door smallDoor = DoorFactor::makeDoor(50, 100);
+```
 
 #### When To Use
 
