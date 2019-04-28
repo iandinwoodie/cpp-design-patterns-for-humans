@@ -312,13 +312,14 @@ classes.
 
 #### Programmatic Example
 
-Translating the door example above. First of all we have our door base class and
-some derivation of it:
+Translating the door example above. First of all we have our door base class
+and some derivation of it:
 
 ```cpp
 class Door
 {
   public:
+    typedef std::shared_ptr<Door> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -347,6 +348,7 @@ Then we have some fitting experts for each door type:
 class DoorFittingExpert
 {
   public:
+    typedef std::shared_ptr<DoorFittingExpert> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -379,35 +381,35 @@ fitting expert:
 class DoorFactory
 {
   public:
-    virtual Door makeDoor(void) = 0;
-    virtual DoorFittingExpert makeFittingExpert(void) = 0;
+    virtual Door::ptr_t makeDoor(void) = 0;
+    virtual DoorFittingExpert::ptr_t makeFittingExpert(void) = 0;
 };
 
 class WoodenDoorFactory : public DoorFactory
 {
   public:
-    Door makeDoor(void)
+    Door::ptr_t makeDoor(void)
     {
-      return WoodenDoor();
+      return std::make_shared<WoodenDoor>();
     }
 
-    DoorFittingExpert makeFittingExpert(void)
+    DoorFittingExpert::ptr_t makeFittingExpert(void)
     {
-      return Carpenter;
+      return std::make_shared<Carpenter>();
     }
 };
 
 class IronDoorFactory : public DoorFactory
 {
   public:
-    Door makeDoor(void)
+    Door::ptr_t makeDoor(void)
     {
-      return IronDoor();
+      return std::make_shared<IronDoor>();
     }
 
-    DoorFittingExpert makeFittingExpert(void)
+    DoorFittingExpert::ptr_t makeFittingExpert(void)
     {
-      return Welder();
+      return std::make_shared<Welder>();
     }
 };
 ```
@@ -415,19 +417,19 @@ class IronDoorFactory : public DoorFactory
 Here is how this can be used:
 
 ```cpp
-DoorFactory woodenFactory = WoodenDoorFactory();
-Door door = woodenFactory.makeDoor();
-DoorFittingExpert expert = woodenFactory.makeFittingExpert();
+WoodenDoorFactory woodenFactory = WoodenDoorFactory();
+Door::ptr_t door = woodenFactory.makeDoor();
+DoorFittingExpert::ptr_t expert = woodenFactory.makeFittingExpert();
 
-door.getDescription(); \\ Output: I am a wooden door.
-expert.getDescription(); \\ Output: I can only fit wooden doors.
+door->getDescription(); // Output: I am a wooden door.
+expert->getDescription(); // Output: I can only fit wooden doors.
 
-DoorFactory ironFactory = IronDoorFactory();
-Door door = ironFactory.makeDoor();
-DoorFittingExpert expert = woodenFactory.makeFittingExpert();
+IronDoorFactory ironFactory = IronDoorFactory();
+Door::ptr_t door2 = ironFactory.makeDoor();
+DoorFittingExpert::ptr_t expert2 = woodenFactory.makeFittingExpert();
 
-door.getDescription(); \\ Output: I am an iron door.
-expert.getDescription(); \\ Output: I can only fit iron doors.
+door2->getDescription(); // Output: I am an iron door.
+expert2->getDescription(); // Output: I can only fit iron doors.
 ```
 
 As you can see the wooden door factory has encapsulated the carpenter and the
