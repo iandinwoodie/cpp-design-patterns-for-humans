@@ -148,7 +148,7 @@ class DoorFactory
 };
 ```
 
-This can be used like so:
+Here is how this can be used:
 
 ```cpp
 \\ Make a door with dimensions 100x200.
@@ -192,7 +192,83 @@ optionally overridden by derived classes—rather than by calling a constructor.
 
 #### Programmatic Example
 
-TODO
+Taking our hiring manager example above. First of all we have an interviewer
+interface and some implementations for it:
+
+```cpp
+class Interviewer
+{
+  public:
+    virtual void askQuestions(void) = 0;
+};
+
+class Developer : public Interviewer
+{
+  public:
+    void askQuestions(void)
+    {
+      std::cout << "Asking about design patterns!" << std::endl;
+    }
+};
+
+class CommunityExecutive : public Interviewer
+{
+  public:
+    void askQuestions(void)
+    {
+      std::cout << "Asking about community building!" << std::endl;
+    }
+};
+```
+
+Now let us create our hiring manager class:
+
+```cpp
+class HiringManager
+{
+  public:
+    void takeInterview(void)
+    {
+      interviewer = makeInterviewer();
+      interviewer.askQuestions();
+    }
+
+  protected:
+    virtual Interviewer makeInterviewer(void) = 0;
+};
+```
+
+Now any child can extend it and provide the required interviewer:
+
+```cpp
+class DevelopmentManager : public HiringManager
+{
+  protected:
+    Interviewer makeInterviewer(void)
+    {
+      return Developer();
+    }
+};
+
+class MarketingManager : public HiringManager
+{
+  protected:
+    Interviewer makeInterviewer(void)
+    {
+      return CommunityExecutive();
+    }
+};
+```
+
+Here is how this can be used:
+
+```cpp
+DevelopmentManager developmentManager = DevelopmentManager();
+developmentManager.takeInterview(); // Output: Asking about design patterns!
+
+MarketingManager marketingManager = MarketingManager();
+marketingManager.takeInterview(); // Output: Asking about community building!
+```
 
 #### When To Use
 
