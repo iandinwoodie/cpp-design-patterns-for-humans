@@ -476,7 +476,7 @@ class Burger
 {
   public:
     Burger(int patties, bool cheese = true, bool pepperoni = true,
-           bool tomato = true, lettuce = true);
+           bool tomato = true, bool lettuce = true);
 }
 ```
 
