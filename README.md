@@ -577,102 +577,342 @@ communication.
 
 #### Overview
 
+Real world example:
+
+> For example, you have three payment methods (`A`, `B` and `C`) setup in your
+account; each having a different amount in it. `A` has 100 USD, `B` has 300 USD
+and `C` having 1000 USD and the preference for payments is chosen as `A` then
+`B` then `C`. You try to purchase something that is worth 210 USD. Using Chain
+of Responsibility, first of all account `A` will be checked if it can make the
+purchase, if yes purchase will be made and the chain will be broken. If not,
+request will move forward to account `B` checking for amount if yes chain will
+be broken otherwise the request will keep forwarding till it finds the suitable
+handler. Here `A`, `B` and `C` are links of the chain and the whole phenomenon
+is Chain of Responsibility.
+
+In plain words:
+
+> It helps building a chain of objects. Request enters from one end and keeps
+going from object to object till it finds the suitable handler.
+
+Wikipedia says:
+
+> In object-oriented design, the chain-of-responsibility pattern is a design
+pattern consisting of a source of command objects and a series of processing
+objects. Each processing object contains logic that defines the types of command
+objects that it can handle; the rest are passed to the next processing object in
+the chain.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 👮 Command
 
 #### Overview
 
+Real world example:
+
+> A generic example would be you ordering food at a restaurant. You (i.e.
+`Client`) ask the waiter (i.e. `Invoker`) to bring some food (i.e. `Command`)
+and waiter simply forwards the request to Chef (i.e. `Receiver`) who has the
+knowledge of what and how to cook.
+
+Another example:
+
+> Another example would be you (i.e. `Client`) switching on (i.e. `Command`) the
+television (i.e. `Receiver`) using a remote control (`Invoker`).
+
+In plain words:
+
+> Allows you to encapsulate actions in objects. The key idea behind this pattern
+is to provide the means to decouple client from receiver.
+
+Wikipedia says:
+
+> In object-oriented programming, the command pattern is a behavioral design
+pattern in which an object is used to encapsulate all information needed to
+perform an action or trigger an event at a later time. This information includes
+the method name, the object that owns the method and values for the method
+parameters.
+
 #### Programmatic Example
 
 TODO
 
+Command pattern can also be used to implement a transaction based system. Where
+you keep maintaining the history of commands as soon as you execute them. If the
+final command is successfully executed, all good otherwise just iterate through
+the history and keep executing the `undo` on all the executed commands.
+
 #### When To Use
+
+TODO
 
 ### ➿ Iterator
 
 #### Overview
 
+Real world example:
+
+> An old radio set will be a good example of iterator, where user could start at
+some channel and then use next or previous buttons to go through the respective
+channels. Or take an example of MP3 player or a TV set where you could press the
+next and previous buttons to go through the consecutive channels or in other
+words they all provide an interface to iterate through the respective channels,
+songs or radio stations.
+
+In plain words:
+
+> It presents a way to access the elements of an object without exposing the
+underlying presentation.
+
+Wikipedia says:
+
+> In object-oriented programming, the iterator pattern is a design pattern in
+which an iterator is used to traverse a container and access the container's
+elements. The iterator pattern decouples algorithms from containers; in some
+cases, algorithms are necessarily container-specific and thus cannot be
+decoupled.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 👽 Mediator
 
 #### Overview
 
+Real world example:
+
+> A general example would be when you talk to someone on your mobile phone,
+there is a network provider sitting between you and them and your conversation
+goes through it instead of being directly sent. In this case network provider is
+mediator.
+
+In plain words:
+
+> Mediator pattern adds a third party object (called mediator) to control the
+interaction between two objects (called colleagues). It helps reduce the
+coupling between the classes communicating with each other. Because now they
+don't need to have the knowledge of each other's implementation.
+
+Wikipedia says:
+
+> In software engineering, the mediator pattern defines an object that
+encapsulates how a set of objects interact. This pattern is considered to be a
+behavioral pattern due to the way it can alter the program's running behavior.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 💾 Memento
 
 #### Overview
 
+Real world example:
+
+> Take the example of calculator (i.e. originator), where whenever you perform
+some calculation the last calculation is saved in memory (i.e. memento) so that
+you can get back to it and maybe get it restored using some action buttons (i.e.
+caretaker).
+
+In plain words:
+
+> Memento pattern is about capturing and storing the current state of an object
+in a manner that it can be restored later on in a smooth manner.
+
+Wikipedia says:
+
+> The memento pattern is a software design pattern that provides the ability to
+restore an object to its previous state (undo via rollback).
+
+Usually useful when you need to provide some sort of undo functionality.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 😎 Observer
 
 #### Overview
 
+Real world example:
+
+> A good example would be the job seekers where they subscribe to some job
+posting site and they are notified whenever there is a matching job opportunity.
+
+In plain words:
+
+> Defines a dependency between objects so that whenever an object changes its
+state, all its dependents are notified.
+
+Wikipedia says:
+
+> The observer pattern is a software design pattern in which an object, called
+the subject, maintains a list of its dependents, called observers, and notifies
+them automatically of any state changes, usually by calling one of their
+methods.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 🏃 Visitor
 
 #### Overview
 
+Real world example:
+
+> Consider someone visiting Dubai. They just need a way (i.e. visa) to enter
+Dubai. After arrival, they can come and visit any place in Dubai on their own
+without having to ask for permission or to do some leg work in order to visit
+any place here; just let them know of a place and they can visit it. Visitor
+pattern lets you do just that, it helps you add places to visit so that they can
+visit as much as they can without having to do any legwork.
+
+In plain words:
+
+> Visitor pattern lets you add further operations to objects without having to
+modify them.
+
+Wikipedia says:
+
+> In object-oriented programming and software engineering, the visitor design
+pattern is a way of separating an algorithm from an object structure on which it
+operates. A practical result of this separation is the ability to add new
+operations to existing object structures without modifying those structures. It
+is one way to follow the open/closed principle.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 💡 Strategy
 
 #### Overview
 
+Real world example:
+
+> Consider the example of sorting, we implemented bubble sort but the data
+started to grow and bubble sort started getting very slow. In order to tackle
+this we implemented Quick sort. But now although the quick sort algorithm was
+doing better for large datasets, it was very slow for smaller datasets. In order
+to handle this we implemented a strategy where for small datasets, bubble sort
+will be used and for larger, quick sort.
+
+In plain words:
+
+> Strategy pattern allows you to switch the algorithm or strategy based upon the
+situation.
+
+Wikipedia says:
+
+> In computer programming, the strategy pattern (also known as the policy
+pattern) is a behavioural software design pattern that enables an algorithm's
+behavior to be selected at runtime.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 💢 State
 
 #### Overview
 
+Real world example:
+
+> Imagine you are using some drawing application, you choose the paint brush to
+draw. Now the brush changes its behavior based on the selected color i.e. if you
+have chosen red color it will draw in red, if blue then it will be in blue etc.
+
+In plain words:
+
+> It lets you change the behavior of a class when the state changes.
+
+Wikipedia says:
+
+> The state pattern is a behavioral software design pattern that implements a
+state machine in an object-oriented way. With the state pattern, a state machine
+is implemented by implementing each individual state as a derived class of the
+state pattern interface, and implementing state transitions by invoking methods
+defined by the pattern's superclass. The state pattern can be interpreted as a
+strategy pattern which is able to switch the current strategy through 
+invocations of methods defined in the pattern's interface.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
+
+TODO
 
 ### 📒 Template Method
 
 #### Overview
 
+Real world example:
+
+> Suppose we are getting some house built. The steps for building might look
+like:
+- Prepare the base of house
+- Build the walls
+- Add roof
+- Add other floors
+
+> The order of these steps could never be changed i.e. you can't build the roof
+ before building the walls etc but each of the steps could be modified for
+ example walls can be made of wood or polyester or stone.
+
+In plain words:
+
+> Template method defines the skeleton of how a certain algorithm could be
+performed, but defers the implementation of those steps to the children classes.
+
+Wikipedia says:
+
+> In software engineering, the template method pattern is a behavioral design
+pattern that defines the program skeleton of an algorithm in an operation,
+deferring some steps to subclasses. It lets one redefine certain steps of an
+algorithm without changing the algorithm's structure.
+
 #### Programmatic Example
 
 TODO
 
 #### When To Use
 
+TODO
 
 ## 🚦 Wrap Up
 
