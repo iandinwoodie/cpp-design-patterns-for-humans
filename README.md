@@ -478,6 +478,7 @@ class Burger
     Burger(int patties, bool cheese = true, bool pepperoni = true,
            bool tomato = true, lettuce = true);
 }
+```
 
 As you can see; the number of constructor parameters can quickly get out of hand
 and it might become difficult to understand the arrangement of parameters. Plus
