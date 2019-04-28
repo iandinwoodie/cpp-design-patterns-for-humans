@@ -313,31 +313,73 @@ entities.
 
 ### 🔌 Adapter
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 🚡 Bridge
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 🌿 Composite
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### ☕ Decorator
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 📦 Facade
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 🍃 Flyweight
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 🎱 Proxy
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ## Behavioral Design Patterns
 
@@ -369,43 +411,104 @@ communication.
 
 ### 🔗 Chain of Responsibility
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 👮 Command
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### ➿ Iterator
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 👽 Mediator
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 💾 Memento
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 😎 Observer
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 🏃 Visitor
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 💡 Strategy
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 💢 State
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
 
 ### 📒 Template Method
 
+#### Overview
+
+#### Programmatic Example
+
 TODO
+
+#### When To Use
+
 
 ## 🚦 Wrap Up
 
