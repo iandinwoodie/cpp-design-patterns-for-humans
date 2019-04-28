@@ -236,4 +236,4 @@ All content of this file, unless otherwise noted, is licensed as follows:
 - All provided source code examples are covered by the
 [MIT License](https://github.com/idinwoodie/cpp-design-patterns-for-humans/blob/master/LICENSE).
 - Other content, including images, is released under the
-[Creative Common Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).
+[Creative Common Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
