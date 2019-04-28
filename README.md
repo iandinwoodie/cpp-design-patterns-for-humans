@@ -471,7 +471,13 @@ Having said that let me add a bit about what telescoping constructor
 anti-pattern is. At one point or the other we have all seen a constructor like
 below:
 
-TODO
+```cpp
+class Burger
+{
+  public:
+    Burger(int patties, bool cheese = true, bool pepperoni = true,
+           bool tomato = true, lettuce = true);
+}
 
 As you can see; the number of constructor parameters can quickly get out of hand
 and it might become difficult to understand the arrangement of parameters. Plus
@@ -480,7 +486,121 @@ in future. This is called telescoping constructor anti-pattern.
 
 #### Programmatic Example
 
-TODO
+The sane alternative is to use the builder pattern. First of all we have our
+burger that we want to make:
+
+```cpp
+class Burger
+{
+  public:
+    typedef std::shared_ptr<Burger> ptr_t;
+    Burger(BurgerBuilder* builder);
+        : patties_(builder->patties), cheese_(builder->cheese),
+          pepperoni_(builder->pepperoni), lettuce_(builder->lettuce),
+          tomato_(builder->tomato)
+    {
+    }
+
+    void getDescription(void);
+    {
+      std::cout << patties_ << " patties";
+      if (cheese_) {
+        std::cout << ", cheese";
+      }
+      if (pepperoni_) {
+        std::cout << ", pepperoni";
+      }
+      if (lettuce_){
+        std::cout << ", lettuce";
+      }
+      if (tomato_) {
+        std::cout << ", tomato";
+      }
+      std::cout << std::endl;
+    }
+
+  private:
+    int patties_;
+    bool cheese_;
+    bool pepperoni_;
+    bool lettuce_;
+    bool tomato_;
+};
+```
+
+And then we have the builder
+
+```cpp
+class BurgerBuilder
+{
+  public:
+    BurgerBuilder(int patties)
+        : patties(patties), cheese(false), pepperoni(false), lettuce(false),
+          tomato(false)
+    {
+    }
+
+    BurgerBuilder& addCheese(void)
+    {
+      cheese = true;
+      return (*this);
+    }
+
+    BurgerBuilder& addPepperoni(void)
+    {
+      pepperoni = true;
+      return (*this);
+    }
+
+    BurgerBuilder& addLettuce(void)
+    {
+      lettuce = true;
+      return (*this);
+    }
+
+    BurgerBuilder& addTomato(void)
+    {
+      tomato = true;
+      return (*this);
+    }
+
+    Burger::ptr_t build(void)
+    {
+      Burger::ptr_t burger(new Burger(this));
+      return burger;
+    }
+
+    int patties;
+    bool cheese;
+    bool pepperoni;
+    bool lettuce;
+    bool tomato;
+};
+
+```
+
+Here is how this can be used:
+
+```cpp
+// One double patty burger with no dairy.
+Burger::ptr_t burger = BurgerBuilder(2).
+    addPepperoni().
+    addLettuce().
+    addTomato().
+    build();
+// Output: 2 patties, pepperoni, lettuce, tomato
+burger->getDescription();
+
+// One triple patty buger with everything.
+Burger::ptr_t burger2 = BurgerBuilder(3).
+    addPepperoni().
+    addCheese().
+    addLettuce().
+    addTomato().
+    build();
+// Output: 3 patties, cheese, pepperoni, lettuce, tomato
+burger2->getDescription();
+```
 
 #### When To Use
 
