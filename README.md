@@ -717,7 +717,39 @@ makes your code tightly coupled plus mocking the singleton could be difficult.
 
 #### Programmatic Example
 
-TODO
+To create a singleton, make the constructor private, disable cloning, and create
+a static variable to house the instance.
+
+```cpp
+class President
+{
+  public:
+    static President& getInstance()
+    {
+      static President instance;
+      return instance;
+    }
+
+  private:
+    President()
+    {
+    }
+
+    ~President()
+    {
+    }
+};
+```
+
+Here is how this can be used:
+
+```cpp
+President& president1 = President::getInstance();
+President& president2 = President::getInstance();
+
+// There can only be 1 president, so they must be the same.
+assert(&president1 == &president2);
+```
 
 #### When To Use
 
