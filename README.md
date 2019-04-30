@@ -813,7 +813,90 @@ source code.
 
 #### Programmatic Example
 
-TODO
+Consider a game where there is a hunter and he hunts lions. First we have a
+lion class that all types of lions have to implement.
+
+```cpp
+class Lion
+{
+  public:
+    virtual void roar(void) = 0;
+};
+
+class AfricanLion : public Lion
+{
+  public:
+    void roar(void)
+    {
+      std::cout << "*African lion roar*" << std::endl;
+    }
+};
+
+class AsianLion : public Lion
+{
+  public:
+    void roar(void)
+    {
+      std::cout << "*Asian lion roar*" << std::endl;
+    }
+};
+```
+
+And hunter expects any implementation of lion class.
+
+```cpp
+class Hunter
+{
+  public:
+    void hunt(Lion& lion)
+    {
+      lion.roar();
+    }
+};
+```
+Now let's say we have to add a wild dog in our game so that hunter can hunt
+that also (Note: I do not condone the hunting of any dogs). But we can't do that
+directly because dog has a different interface. To make it compatible for our
+hunter, we will have to create an adapter that is compatible.
+
+```cpp
+class WildDog
+{
+  public:
+    typedef std::shared_ptr<WildDog> ptr_t;
+    void bark(void)
+    {
+      std::cout << "*wild dog bark*" << std::endl;
+    }
+};
+
+class WildDogAdapter : public Lion
+{
+  public:
+    WildDogAdapter(WildDog::ptr_t dog)
+        : dog_(dog)
+    {
+    }
+
+    void roar(void)
+    {
+      dog_->bark();
+    }
+
+  private:
+    WildDog::ptr_t dog_;
+};
+```
+
+Here is how this can be used:
+
+```cpp
+WildDog::ptr_t wildDog = std::make_shared<WildDog>();
+WildDogAdapter wildDogAdapter(wildDog);
+
+Hunter hunter;
+hunter.hunt(wildDogAdapter); // Output: *wild dog bark*
+```
 
 #### When To Use
 
