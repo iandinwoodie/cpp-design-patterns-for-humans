@@ -4,7 +4,6 @@
 class Door
 {
   public:
-    typedef std::shared_ptr<Door> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -29,7 +28,6 @@ class IronDoor : public Door
 class DoorFittingExpert
 {
   public:
-    typedef std::shared_ptr<DoorFittingExpert> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -48,26 +46,25 @@ class Carpenter : public DoorFittingExpert
     void getDescription(void)
     {
       std::cout << "I can only fit wooden doors." << std::endl;
-
     }
 };
 
 class DoorFactory
 {
   public:
-    virtual Door::ptr_t makeDoor(void) = 0;
-    virtual DoorFittingExpert::ptr_t makeFittingExpert(void) = 0;
+    virtual std::shared_ptr<Door> makeDoor(void) = 0;
+    virtual std::shared_ptr<DoorFittingExpert> makeFittingExpert(void) = 0;
 };
 
 class WoodenDoorFactory : public DoorFactory
 {
   public:
-    Door::ptr_t makeDoor(void)
+    std::shared_ptr<Door> makeDoor(void)
     {
       return std::make_shared<WoodenDoor>();
     }
 
-    DoorFittingExpert::ptr_t makeFittingExpert(void)
+    std::shared_ptr<DoorFittingExpert> makeFittingExpert(void)
     {
       return std::make_shared<Carpenter>();
     }
@@ -76,12 +73,12 @@ class WoodenDoorFactory : public DoorFactory
 class IronDoorFactory : public DoorFactory
 {
   public:
-    Door::ptr_t makeDoor(void)
+    std::shared_ptr<Door> makeDoor(void)
     {
       return std::make_shared<IronDoor>();
     }
 
-    DoorFittingExpert::ptr_t makeFittingExpert(void)
+    std::shared_ptr<DoorFittingExpert> makeFittingExpert(void)
     {
       return std::make_shared<Welder>();
     }
@@ -90,15 +87,15 @@ class IronDoorFactory : public DoorFactory
 int main()
 {
   WoodenDoorFactory woodenFactory = WoodenDoorFactory();
-  Door::ptr_t door = woodenFactory.makeDoor();
-  DoorFittingExpert::ptr_t expert = woodenFactory.makeFittingExpert();
+  std::shared_ptr<Door> door = woodenFactory.makeDoor();
+  std::shared_ptr<DoorFittingExpert> expert = woodenFactory.makeFittingExpert();
 
   door->getDescription(); // Output: I am a wooden door.
   expert->getDescription(); // Output: I can only fit wooden doors.
 
   IronDoorFactory ironFactory = IronDoorFactory();
-  Door::ptr_t door2 = ironFactory.makeDoor();
-  DoorFittingExpert::ptr_t expert2 = woodenFactory.makeFittingExpert();
+  std::shared_ptr<Door> door2 = ironFactory.makeDoor();
+  std::shared_ptr<DoorFittingExpert> expert2 = woodenFactory.makeFittingExpert();
 
   door2->getDescription(); // Output: I am an iron door.
   expert2->getDescription(); // Output: I can only fit iron doors.

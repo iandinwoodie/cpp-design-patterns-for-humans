@@ -6,7 +6,6 @@ class BurgerBuilder;
 class Burger
 {
   public:
-    typedef std::shared_ptr<Burger> ptr_t;
     Burger(BurgerBuilder* builder);
     void getDescription(void);
 
@@ -51,10 +50,9 @@ class BurgerBuilder
       return (*this);
     }
 
-    Burger::ptr_t build(void)
+    std::shared_ptr<Burger> build(void)
     {
-      Burger::ptr_t burger(new Burger(this));
-      return burger;
+      return std::make_shared<Burger>(this);
     }
 
     int patties;
@@ -92,7 +90,7 @@ void Burger::getDescription(void)
 int main()
 {
   // One double patty burger with no dairy.
-  Burger::ptr_t burger = BurgerBuilder(2).
+  std::shared_ptr<Burger> burger = BurgerBuilder(2).
       addPepperoni().
       addLettuce().
       addTomato().
@@ -101,7 +99,7 @@ int main()
   burger->getDescription();
 
   // One triple patty buger with everything.
-  Burger::ptr_t burger2 = BurgerBuilder(3).
+  std::shared_ptr<Burger> burger2 = BurgerBuilder(3).
       addPepperoni().
       addCheese().
       addLettuce().

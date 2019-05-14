@@ -4,7 +4,6 @@
 class Interviewer
 {
   public:
-    typedef std::shared_ptr<Interviewer> ptr_t;
     virtual void askQuestions(void) = 0;
 };
 
@@ -31,18 +30,18 @@ class HiringManager
   public:
     void takeInterview(void)
     {
-      Interviewer::ptr_t interviewer = makeInterviewer();
+      std::shared_ptr<Interviewer> interviewer = makeInterviewer();
       interviewer->askQuestions();
     }
 
   protected:
-    virtual Interviewer::ptr_t makeInterviewer(void) = 0;
+    virtual std::shared_ptr<Interviewer> makeInterviewer(void) = 0;
 };
 
 class DevelopmentManager : public HiringManager
 {
   protected:
-    Interviewer::ptr_t makeInterviewer(void)
+    std::shared_ptr<Interviewer> makeInterviewer(void)
     {
       return std::make_shared<Developer>();
     }
@@ -51,7 +50,7 @@ class DevelopmentManager : public HiringManager
 class MarketingManager : public HiringManager
 {
   protected:
-    Interviewer::ptr_t makeInterviewer(void)
+    std::shared_ptr<Interviewer> makeInterviewer(void)
     {
       return std::make_shared<CommunityExecutive>();
     }
