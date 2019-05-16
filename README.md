@@ -108,7 +108,6 @@ First of all we have a door base class and a wooden door derived class:
 class Door
 {
   public:
-    typedef std::shared_ptr<Door> ptr_t;
     virtual float getWidth(void) = 0;
     virtual float getHeight(void) = 0;
 };
@@ -143,7 +142,7 @@ Then we have our door factory that makes the door and returns it:
 class DoorFactory
 {
   public:
-    static Door::ptr_t makeDoor(float width, float height)
+    static std::shared_ptr<Door> makeDoor(float width, float height)
     {
       return std::make_shared<WoodenDoor>(width, height);
     }
@@ -154,7 +153,7 @@ Here is how this can be used:
 
 ```cpp
 // Make a door with dimensions 100x200.
-Door::ptr_t door = DoorFactory::makeDoor(100, 200);
+std::shared_ptr<Door> door = DoorFactory::makeDoor(100, 200);
 
 // Output: width = 100
 std::cout << "width = " << door->getWidth() << std::endl;
@@ -162,7 +161,7 @@ std::cout << "width = " << door->getWidth() << std::endl;
 std::cout << "height = " << door->getHeight() << std::endl;
 
 // We can use the factory again to make a door with dimensions 50x100.
-Door::ptr_t door2 = DoorFactory::makeDoor(50, 100);
+std::shared_ptr<Door> door2 = DoorFactory::makeDoor(50, 100);
 
 // Output: width = 50
 std::cout << "width = " << door2->getWidth() << std::endl;
@@ -208,7 +207,6 @@ interface and some implementations for it:
 class Interviewer
 {
   public:
-    typedef std::shared_ptr<Interviewer> ptr_t;
     virtual void askQuestions(void) = 0;
 };
 
@@ -239,12 +237,12 @@ class HiringManager
   public:
     void takeInterview(void)
     {
-      Interviewer::ptr_t interviewer = makeInterviewer();
+      std::shared_ptr<Interviewer> interviewer = makeInterviewer();
       interviewer->askQuestions();
     }
 
   protected:
-    virtual Interviewer::ptr_t makeInterviewer(void) = 0;
+    virtual std::shared_ptr<Interviewer> makeInterviewer(void) = 0;
 };
 ```
 
@@ -254,7 +252,7 @@ Now any child can extend it and provide the required interviewer:
 class DevelopmentManager : public HiringManager
 {
   protected:
-    Interviewer::ptr_t makeInterviewer(void)
+    std::shared_ptr<Interviewer> makeInterviewer(void)
     {
       return std::make_shared<Developer>();
     }
@@ -263,7 +261,7 @@ class DevelopmentManager : public HiringManager
 class MarketingManager : public HiringManager
 {
   protected:
-    Interviewer::ptr_t makeInterviewer(void)
+    std::shared_ptr<Interviewer> makeInterviewer(void)
     {
       return std::make_shared<CommunityExecutive>();
     }
@@ -319,7 +317,6 @@ and some derivation of it:
 class Door
 {
   public:
-    typedef std::shared_ptr<Door> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -348,7 +345,6 @@ Then we have some fitting experts for each door type:
 class DoorFittingExpert
 {
   public:
-    typedef std::shared_ptr<DoorFittingExpert> ptr_t;
     virtual void getDescription(void) = 0;
 };
 
@@ -381,19 +377,19 @@ fitting expert:
 class DoorFactory
 {
   public:
-    virtual Door::ptr_t makeDoor(void) = 0;
-    virtual DoorFittingExpert::ptr_t makeFittingExpert(void) = 0;
+    virtual std::shared_ptr<Door> makeDoor(void) = 0;
+    virtual std::shared_ptr<DoorFittingExpert> makeFittingExpert(void) = 0;
 };
 
 class WoodenDoorFactory : public DoorFactory
 {
   public:
-    Door::ptr_t makeDoor(void)
+    std::shared_ptr<Door> makeDoor(void)
     {
       return std::make_shared<WoodenDoor>();
     }
 
-    DoorFittingExpert::ptr_t makeFittingExpert(void)
+    std::shared_ptr<DoorFittingExpert> makeFittingExpert(void)
     {
       return std::make_shared<Carpenter>();
     }
@@ -402,12 +398,12 @@ class WoodenDoorFactory : public DoorFactory
 class IronDoorFactory : public DoorFactory
 {
   public:
-    Door::ptr_t makeDoor(void)
+    std::shared_ptr<Door> makeDoor(void)
     {
       return std::make_shared<IronDoor>();
     }
 
-    DoorFittingExpert::ptr_t makeFittingExpert(void)
+    std::shared_ptr<DoorFittingExpert> makeFittingExpert(void)
     {
       return std::make_shared<Welder>();
     }
@@ -418,15 +414,15 @@ Here is how this can be used:
 
 ```cpp
 WoodenDoorFactory woodenFactory = WoodenDoorFactory();
-Door::ptr_t door = woodenFactory.makeDoor();
-DoorFittingExpert::ptr_t expert = woodenFactory.makeFittingExpert();
+std::shared_ptr<Door> door = woodenFactory.makeDoor();
+std::shared_ptr<DoorFittingExpert> expert = woodenFactory.makeFittingExpert();
 
 door->getDescription(); // Output: I am a wooden door.
 expert->getDescription(); // Output: I can only fit wooden doors.
 
 IronDoorFactory ironFactory = IronDoorFactory();
-Door::ptr_t door2 = ironFactory.makeDoor();
-DoorFittingExpert::ptr_t expert2 = woodenFactory.makeFittingExpert();
+std::shared_ptr<Door> door2 = ironFactory.makeDoor();
+std::shared_ptr<DoorFittingExpert> expert2 = woodenFactory.makeFittingExpert();
 
 door2->getDescription(); // Output: I am an iron door.
 expert2->getDescription(); // Output: I can only fit iron doors.
@@ -494,7 +490,6 @@ burger that we want to make:
 class Burger
 {
   public:
-    typedef std::shared_ptr<Burger> ptr_t;
     Burger(BurgerBuilder* builder);
         : patties_(builder->patties), cheese_(builder->cheese),
           pepperoni_(builder->pepperoni), lettuce_(builder->lettuce),
@@ -565,10 +560,9 @@ class BurgerBuilder
       return (*this);
     }
 
-    Burger::ptr_t build(void)
+    std::shared_ptr<Burger> build(void)
     {
-      Burger::ptr_t burger(new Burger(this));
-      return burger;
+      return std::make_shared<Burger>(this);
     }
 
     int patties;
@@ -584,7 +578,7 @@ Here is how this can be used:
 
 ```cpp
 // One double patty burger with no dairy.
-Burger::ptr_t burger = BurgerBuilder(2).
+std::shared_ptr<Burger> burger = BurgerBuilder(2).
     addPepperoni().
     addLettuce().
     addTomato().
@@ -593,7 +587,7 @@ Burger::ptr_t burger = BurgerBuilder(2).
 burger->getDescription();
 
 // One triple patty buger with everything.
-Burger::ptr_t burger2 = BurgerBuilder(3).
+std::shared_ptr<Burger> burger2 = BurgerBuilder(3).
     addPepperoni().
     addCheese().
     addLettuce().
