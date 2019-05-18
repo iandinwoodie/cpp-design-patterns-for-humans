@@ -6,7 +6,6 @@
 class Employee
 {
   public:
-    typedef std::shared_ptr<Employee> ptr_t;
     virtual std::string getName(void) = 0;
     virtual void setSalary(float salary) = 0;
     virtual float getSalary(void) = 0;
@@ -84,7 +83,7 @@ class Designer : public Employee
 class Organization
 {
   public:
-    void addEmployee(Employee::ptr_t employee)
+    void addEmployee(std::shared_ptr<Employee> employee)
     {
       employees_.push_back(employee);
     }
@@ -100,14 +99,14 @@ class Organization
     }
 
   private:
-    std::vector<Employee::ptr_t> employees_;
+    std::vector<std::shared_ptr<Employee>> employees_;
 };
 
 int main()
 {
   // Prepare the employees.
-  Employee::ptr_t jane = std::make_shared<Developer>("Jane Doe", 50000);
-  Employee::ptr_t john = std::make_shared<Designer>("John Doe", 45000);
+  std::shared_ptr<Employee> jane = std::make_shared<Developer>("Jane", 50000);
+  std::shared_ptr<Employee> john = std::make_shared<Designer>("John", 45000);
 
   // Add them to the organization.
   Organization org;

@@ -5,7 +5,6 @@
 class Coffee
 {
   public:
-    typedef std::shared_ptr<Coffee> ptr_t;
     virtual float getPrice(void) = 0;
     virtual std::string getDescription(void) = 0;
 };
@@ -27,7 +26,7 @@ class SimpleCoffee : public Coffee
 class MilkCoffee : public Coffee
 {
   public:
-    MilkCoffee(Coffee::ptr_t coffee)
+    MilkCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -43,13 +42,13 @@ class MilkCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 
 class WhipCoffee : public Coffee
 {
   public:
-    WhipCoffee(Coffee::ptr_t coffee)
+    WhipCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -65,13 +64,13 @@ class WhipCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 
 class VanillaCoffee : public Coffee
 {
   public:
-    VanillaCoffee(Coffee::ptr_t coffee)
+    VanillaCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -87,30 +86,30 @@ class VanillaCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 
 int main()
 {
-  Coffee::ptr_t simple = std::make_shared<SimpleCoffee>();
+  std::shared_ptr<Coffee> simple = std::make_shared<SimpleCoffee>();
   // Output: 3
   std::cout << simple->getPrice() << std::endl;
   // Output: Simple coffee
   std::cout << simple->getDescription() << std::endl;
 
-  Coffee::ptr_t milk = std::make_shared<MilkCoffee>(simple);
+  std::shared_ptr<Coffee> milk = std::make_shared<MilkCoffee>(simple);
   // Output: 3.5
   std::cout << milk->getPrice() << std::endl;
   // Output: Simple coffee, milk
   std::cout << milk->getDescription() << std::endl;
 
-  Coffee::ptr_t whip = std::make_shared<WhipCoffee>(milk);
+  std::shared_ptr<Coffee> whip = std::make_shared<WhipCoffee>(milk);
   // Output: 5.5
   std::cout << whip->getPrice() << std::endl;
   // Output: Simple coffee, milk, whip
   std::cout << whip->getDescription() << std::endl;
 
-  Coffee::ptr_t vanilla = std::make_shared<VanillaCoffee>(whip);
+  std::shared_ptr<Coffee> vanilla = std::make_shared<VanillaCoffee>(whip);
   // Output: 6.5
   std::cout << vanilla->getPrice() << std::endl;
   // Output: Simple coffee, milk, whip, vanilla

@@ -5,7 +5,6 @@
 class Theme
 {
   public:
-    typedef std::shared_ptr<Theme> ptr_t;
     virtual std::string getColor(void) = 0;
 };
 
@@ -18,7 +17,7 @@ class WebPage
 class About : public WebPage
 {
   public:
-    About(Theme::ptr_t theme)
+    About(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -29,13 +28,13 @@ class About : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 
 class Projects : public WebPage
 {
   public:
-    Projects(Theme::ptr_t theme)
+    Projects(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -46,14 +45,14 @@ class Projects : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 
 
 class Careers : public WebPage
 {
   public:
-    Careers(Theme::ptr_t theme)
+    Careers(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -64,7 +63,7 @@ class Careers : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 
 class DarkTheme : public Theme
@@ -96,7 +95,7 @@ class AquaTheme : public Theme
 
 int main()
 {
-  Theme::ptr_t darkTheme = std::make_shared<DarkTheme>();
+  std::shared_ptr<Theme> darkTheme = std::make_shared<DarkTheme>();
   About about(darkTheme);
   Careers careers(darkTheme);
 

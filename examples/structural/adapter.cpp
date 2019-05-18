@@ -37,7 +37,6 @@ class Hunter
 class WildDog
 {
   public:
-    typedef std::shared_ptr<WildDog> ptr_t;
     void bark(void)
     {
       std::cout << "*wild dog bark*" << std::endl;
@@ -47,7 +46,7 @@ class WildDog
 class WildDogAdapter : public Lion
 {
   public:
-    WildDogAdapter(WildDog::ptr_t dog)
+    WildDogAdapter(std::shared_ptr<WildDog> dog)
         : dog_(dog)
     {
     }
@@ -58,12 +57,12 @@ class WildDogAdapter : public Lion
     }
 
   private:
-    WildDog::ptr_t dog_;
+    std::shared_ptr<WildDog> dog_;
 };
 
 int main()
 {
-  WildDog::ptr_t wildDog = std::make_shared<WildDog>();
+  std::shared_ptr<WildDog> wildDog = std::make_shared<WildDog>();
   WildDogAdapter wildDogAdapter(wildDog);
 
   Hunter hunter;

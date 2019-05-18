@@ -4,8 +4,6 @@
 class Computer
 {
   public:
-    typedef std::shared_ptr<Computer> ptr_t;
-
     void makeBootSound(void)
     {
       std::cout << "Beep!" << std::endl;
@@ -34,7 +32,7 @@ class Computer
 class ComputerFacade
 {
   public:
-    ComputerFacade(Computer::ptr_t computer)
+    ComputerFacade(std::shared_ptr<Computer> computer)
         : computer_(computer)
     {
     }
@@ -53,12 +51,12 @@ class ComputerFacade
     }
 
   private:
-    Computer::ptr_t computer_;
+    std::shared_ptr<Computer> computer_;
 };
 
 int main()
 {
-  Computer::ptr_t computer = std::make_shared<Computer>();
+  std::shared_ptr<Computer> computer = std::make_shared<Computer>();
   ComputerFacade facade(computer);
 
   // Output:

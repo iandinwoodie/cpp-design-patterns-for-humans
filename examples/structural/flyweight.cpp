@@ -2,18 +2,14 @@
 #include <memory>
 #include <unordered_map>
 
-class Tea
+struct Tea
 {
-  public:
-    typedef std::shared_ptr<Tea> ptr_t;
 };
 
 class TeaMaker
 {
   public:
-    typedef std::shared_ptr<TeaMaker> ptr_t;
-
-    Tea::ptr_t make(const std::string& preference)
+    std::shared_ptr<Tea> make(const std::string& preference)
     {
       auto match = availableTea_.find(preference);
       if (match == availableTea_.end()) {
@@ -29,13 +25,13 @@ class TeaMaker
     }
 
   private:
-    std::unordered_map<std::string, Tea::ptr_t> availableTea_;
+    std::unordered_map<std::string, std::shared_ptr<Tea>> availableTea_;
 };
 
 class TeaShop
 {
   public:
-    TeaShop(TeaMaker::ptr_t maker)
+    TeaShop(std::shared_ptr<TeaMaker> maker)
         : maker_(maker)
     {
     }
@@ -58,13 +54,13 @@ class TeaShop
     }
 
   private:
-    TeaMaker::ptr_t maker_;
-    std::unordered_map<int, Tea::ptr_t> orders_;
+    std::shared_ptr<TeaMaker> maker_;
+    std::unordered_map<int, std::shared_ptr<Tea>> orders_;
 };
 
 int main()
 {
-  TeaMaker::ptr_t maker = std::make_shared<TeaMaker>();
+  std::shared_ptr<TeaMaker> maker = std::make_shared<TeaMaker>();
   TeaShop shop(maker);
 
   // No orders have been taken, so there are no available teas.

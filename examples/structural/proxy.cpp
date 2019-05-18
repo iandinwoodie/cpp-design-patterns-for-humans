@@ -5,7 +5,6 @@
 class Door
 {
   public:
-    typedef std::shared_ptr<Door> ptr_t;
     virtual void open(void) = 0;
     virtual void close(void) = 0;
 };
@@ -27,7 +26,7 @@ class LabDoor : public Door
 class SecuredDoor
 {
   public:
-    SecuredDoor(Door::ptr_t door)
+    SecuredDoor(std::shared_ptr<Door> door)
         : door_(door)
     {
     }
@@ -52,12 +51,12 @@ class SecuredDoor
       return password == "Bond007";
     }
 
-    Door::ptr_t door_;
+    std::shared_ptr<Door> door_;
 };
 
 int main()
 {
-  Door::ptr_t labDoor = std::make_shared<LabDoor>();
+  std::shared_ptr<Door> labDoor = std::make_shared<LabDoor>();
   SecuredDoor securedDoor(labDoor);
 
   securedDoor.open("invalid"); // Output: No way, Jose!
