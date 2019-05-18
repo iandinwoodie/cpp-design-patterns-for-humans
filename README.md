@@ -857,7 +857,6 @@ hunter, we will have to create an adapter that is compatible.
 class WildDog
 {
   public:
-    typedef std::shared_ptr<WildDog> ptr_t;
     void bark(void)
     {
       std::cout << "*wild dog bark*" << std::endl;
@@ -867,7 +866,7 @@ class WildDog
 class WildDogAdapter : public Lion
 {
   public:
-    WildDogAdapter(WildDog::ptr_t dog)
+    WildDogAdapter(std::shared_ptr<WildDog> dog)
         : dog_(dog)
     {
     }
@@ -878,14 +877,14 @@ class WildDogAdapter : public Lion
     }
 
   private:
-    WildDog::ptr_t dog_;
+    std::shared_ptr<WildDog> dog_;
 };
 ```
 
 Here is how this can be used:
 
 ```cpp
-WildDog::ptr_t wildDog = std::make_shared<WildDog>();
+std::shared_ptr<WildDog> wildDog = std::make_shared<WildDog>();
 WildDogAdapter wildDogAdapter(wildDog);
 
 Hunter hunter;
@@ -936,7 +935,7 @@ class WebPage
 class About : public WebPage
 {
   public:
-    About(Theme::ptr_t theme)
+    About(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -947,13 +946,13 @@ class About : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 
 class Projects : public WebPage
 {
   public:
-    Projects(Theme::ptr_t theme)
+    Projects(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -964,14 +963,14 @@ class Projects : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 
 
 class Careers : public WebPage
 {
   public:
-    Careers(Theme::ptr_t theme)
+    Careers(std::shared_ptr<Theme> theme)
         : theme_(theme)
     {
     }
@@ -982,7 +981,7 @@ class Careers : public WebPage
     }
 
   private:
-    Theme::ptr_t theme_;
+    std::shared_ptr<Theme> theme_;
 };
 ```
 
@@ -992,7 +991,6 @@ And the separate theme hierarchy.
 class Theme
 {
   public:
-    typedef std::shared_ptr<Theme> ptr_t;
     virtual std::string getColor(void) = 0;
 };
 
@@ -1027,7 +1025,7 @@ class AquaTheme : public Theme
 Here is how this can be used:
 
 ```cpp
-Theme::ptr_t darkTheme = std::make_shared<DarkTheme>();
+std::shared_ptr<Theme> darkTheme = std::make_shared<DarkTheme>();
 About about(darkTheme);
 Careers careers(darkTheme);
 
@@ -1073,7 +1071,6 @@ Taking our employees example from above. Here we have different employee types
 class Employee
 {
   public:
-    typedef std::shared_ptr<Employee> ptr_t;
     virtual std::string getName(void) = 0;
     virtual void setSalary(float salary) = 0;
     virtual float getSalary(void) = 0;
@@ -1155,7 +1152,7 @@ Then we have an organization which consists of several different types of employ
 class Organization
 {
   public:
-    void addEmployee(Employee::ptr_t employee)
+    void addEmployee(std::shared_ptr<Employee> employee)
     {
       employees_.push_back(employee);
     }
@@ -1171,7 +1168,7 @@ class Organization
     }
 
   private:
-    std::vector<Employee::ptr_t> employees_;
+    std::vector<std::shared_ptr<Employee>> employees_;
 };
 ```
 
@@ -1179,8 +1176,8 @@ Here is how this can be used:
 
 ```cpp
 // Prepare the employees.
-Employee::ptr_t jane = std::make_shared<Developer>("Jane Doe", 50000);
-Employee::ptr_t john = std::make_shared<Designer>("John Doe", 45000);
+std::shared_ptr<Employee> jane = std::make_shared<Developer>("Jane", 50000);
+std::shared_ptr<Employee> john = std::make_shared<Designer>("John", 45000);
 
 // Add them to the organization.
 Organization org;
@@ -1229,7 +1226,6 @@ the coffee class
 class Coffee
 {
   public:
-    typedef std::shared_ptr<Coffee> ptr_t;
     virtual float getPrice(void) = 0;
     virtual std::string getDescription(void) = 0;
 };
@@ -1256,7 +1252,7 @@ Lets make some add-ons (decorators)
 class MilkCoffee : public Coffee
 {
   public:
-    MilkCoffee(Coffee::ptr_t coffee)
+    MilkCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -1272,13 +1268,13 @@ class MilkCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 
 class WhipCoffee : public Coffee
 {
   public:
-    WhipCoffee(Coffee::ptr_t coffee)
+    WhipCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -1294,13 +1290,13 @@ class WhipCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 
 class VanillaCoffee : public Coffee
 {
   public:
-    VanillaCoffee(Coffee::ptr_t coffee)
+    VanillaCoffee(std::shared_ptr<Coffee> coffee)
         : coffee_(coffee)
     {
     }
@@ -1316,32 +1312,32 @@ class VanillaCoffee : public Coffee
     }
 
   private:
-    Coffee::ptr_t coffee_;
+    std::shared_ptr<Coffee> coffee_;
 };
 ```
 
 Here is how this can be used:
 
 ```cpp
-Coffee::ptr_t simple = std::make_shared<SimpleCoffee>();
+std::shared_ptr<Coffee> simple = std::make_shared<SimpleCoffee>();
 // Output: 3
 std::cout << simple->getPrice() << std::endl;
 // Output: Simple coffee
 std::cout << simple->getDescription() << std::endl;
 
-Coffee::ptr_t milk = std::make_shared<MilkCoffee>(simple);
+std::shared_ptr<Coffee> milk = std::make_shared<MilkCoffee>(simple);
 // Output: 3.5
 std::cout << milk->getPrice() << std::endl;
 // Output: Simple coffee, milk
 std::cout << milk->getDescription() << std::endl;
 
-Coffee::ptr_t whip = std::make_shared<WhipCoffee>(milk);
+std::shared_ptr<Coffee> whip = std::make_shared<WhipCoffee>(milk);
 // Output: 5.5
 std::cout << whip->getPrice() << std::endl;
 // Output: Simple coffee, milk, whip
 std::cout << whip->getDescription() << std::endl;
 
-Coffee::ptr_t vanilla = std::make_shared<VanillaCoffee>(whip);
+std::shared_ptr<Coffee> vanilla = std::make_shared<VanillaCoffee>(whip);
 // Output: 6.5
 std::cout << vanilla->getPrice() << std::endl;
 // Output: Simple coffee, milk, whip, vanilla
@@ -1380,8 +1376,6 @@ Taking our computer example from above. Here we have the computer class
 class Computer
 {
   public:
-    typedef std::shared_ptr<Computer> ptr_t;
-
     void makeBootSound(void)
     {
       std::cout << "Beep!" << std::endl;
@@ -1414,7 +1408,7 @@ Here we have the facade
 class ComputerFacade
 {
   public:
-    ComputerFacade(Computer::ptr_t computer)
+    ComputerFacade(std::shared_ptr<Computer> computer)
         : computer_(computer)
     {
     }
@@ -1433,14 +1427,14 @@ class ComputerFacade
     }
 
   private:
-    Computer::ptr_t computer_;
+    std::shared_ptr<Computer> computer_;
 };
 ```
 
 Here is how this can be used:
 
 ```cpp
-Computer::ptr_t computer = std::make_shared<Computer>();
+std::shared_ptr<Computer> computer = std::make_shared<Computer>();
 ComputerFacade facade(computer);
 
 // Output:
@@ -1487,18 +1481,14 @@ Translating our tea example from above. First of all we have tea types and tea
 maker
 
 ```cpp
-class Tea
+struct Tea
 {
-  public:
-    typedef std::shared_ptr<Tea> ptr_t;
 };
 
 class TeaMaker
 {
   public:
-    typedef std::shared_ptr<TeaMaker> ptr_t;
-
-    Tea::ptr_t make(const std::string& preference)
+    std::shared_ptr<Tea> make(const std::string& preference)
     {
       auto match = availableTea_.find(preference);
       if (match == availableTea_.end()) {
@@ -1514,7 +1504,7 @@ class TeaMaker
     }
 
   private:
-    std::unordered_map<std::string, Tea::ptr_t> availableTea_;
+    std::unordered_map<std::string, std::shared_ptr<Tea>> availableTea_;
 };
 ```
 
@@ -1524,7 +1514,7 @@ Then we have the tea shop which takes orders and serves them
 class TeaShop
 {
   public:
-    TeaShop(TeaMaker::ptr_t maker)
+    TeaShop(std::shared_ptr<TeaMaker> maker)
         : maker_(maker)
     {
     }
@@ -1547,15 +1537,15 @@ class TeaShop
     }
 
   private:
-    TeaMaker::ptr_t maker_;
-    std::unordered_map<int, Tea::ptr_t> orders_;
+    std::shared_ptr<TeaMaker> maker_;
+    std::unordered_map<int, std::shared_ptr<Tea>> orders_;
 };
 ```
 
 Here is how this can be used:
 
 ```cpp
-TeaMaker::ptr_t maker = std::make_shared<TeaMaker>();
+std::shared_ptr<TeaMaker> maker = std::make_shared<TeaMaker>();
 TeaShop shop(maker);
 
 // No orders have been taken, so there are no available teas.
@@ -1620,7 +1610,6 @@ and an implementation of door
 class Door
 {
   public:
-    typedef std::shared_ptr<Door> ptr_t;
     virtual void open(void) = 0;
     virtual void close(void) = 0;
 };
@@ -1646,7 +1635,7 @@ Then we have a proxy to secure any doors that we want
 class SecuredDoor
 {
   public:
-    SecuredDoor(Door::ptr_t door)
+    SecuredDoor(std::shared_ptr<Door> door)
         : door_(door)
     {
     }
@@ -1671,14 +1660,14 @@ class SecuredDoor
       return password == "Bond007";
     }
 
-    Door::ptr_t door_;
+    std::shared_ptr<Door> door_;
 };
 ```
 
 Here is how this can be used:
 
 ```cpp
-Door::ptr_t labDoor = std::make_shared<LabDoor>();
+std::shared_ptr<Door> labDoor = std::make_shared<LabDoor>();
 SecuredDoor securedDoor(labDoor);
 
 securedDoor.open("invalid"); // Output: No way, Jose!
