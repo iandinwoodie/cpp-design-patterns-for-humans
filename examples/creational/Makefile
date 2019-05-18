@@ -9,3 +9,5 @@ $(targets): %: %.cpp
 
 clean:
 	$(RM) $(targets)
+
+.PHONY: all clean
