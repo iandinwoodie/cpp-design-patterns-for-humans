@@ -1,4 +1,4 @@
-dirs= creational structural
+dirs= $(wildcard */.)
 cleandirs= $(dirs:%=clean-%)
 
 all: $(dirs)
