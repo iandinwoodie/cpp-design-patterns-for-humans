@@ -114,4 +114,6 @@ int main()
   std::cout << vanilla->getPrice() << std::endl;
   // Output: Simple coffee, milk, whip, vanilla
   std::cout << vanilla->getDescription() << std::endl;
+
+  return 0;
 }
