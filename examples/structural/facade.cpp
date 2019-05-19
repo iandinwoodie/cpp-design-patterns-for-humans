@@ -59,16 +59,16 @@ int main()
   std::shared_ptr<Computer> computer = std::make_shared<Computer>();
   ComputerFacade facade(computer);
 
+  facade.turnOn();
   // Output:
   // Beep!
   // Loading...
   // Ready to use!
-  facade.turnOn();
 
+  facade.turnOff();
   // Output:
   // Closing all programs!
   // Zzz
-  facade.turnOff();
 
   return 0;
 }

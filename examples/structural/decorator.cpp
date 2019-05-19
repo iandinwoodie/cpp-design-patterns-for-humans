@@ -92,28 +92,28 @@ class VanillaCoffee : public Coffee
 int main()
 {
   std::shared_ptr<Coffee> simple = std::make_shared<SimpleCoffee>();
-  // Output: 3
   std::cout << simple->getPrice() << std::endl;
-  // Output: Simple coffee
+  // Output: 3
   std::cout << simple->getDescription() << std::endl;
+  // Output: Simple coffee
 
   std::shared_ptr<Coffee> milk = std::make_shared<MilkCoffee>(simple);
-  // Output: 3.5
   std::cout << milk->getPrice() << std::endl;
-  // Output: Simple coffee, milk
+  // Output: 3.5
   std::cout << milk->getDescription() << std::endl;
+  // Output: Simple coffee, milk
 
   std::shared_ptr<Coffee> whip = std::make_shared<WhipCoffee>(milk);
-  // Output: 5.5
   std::cout << whip->getPrice() << std::endl;
-  // Output: Simple coffee, milk, whip
+  // Output: 5.5
   std::cout << whip->getDescription() << std::endl;
+  // Output: Simple coffee, milk, whip
 
   std::shared_ptr<Coffee> vanilla = std::make_shared<VanillaCoffee>(whip);
-  // Output: 6.5
   std::cout << vanilla->getPrice() << std::endl;
-  // Output: Simple coffee, milk, whip, vanilla
+  // Output: 6.5
   std::cout << vanilla->getDescription() << std::endl;
+  // Output: Simple coffee, milk, whip, vanilla
 
   return 0;
 }

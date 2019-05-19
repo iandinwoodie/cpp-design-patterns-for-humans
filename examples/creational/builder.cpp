@@ -95,8 +95,8 @@ int main()
       addLettuce().
       addTomato().
       build();
-  // Output: 2 patties, pepperoni, lettuce, tomato
   burger->getDescription();
+  // Output: 2 patties, pepperoni, lettuce, tomato
 
   // One triple patty buger with everything.
   std::shared_ptr<Burger> burger2 = BurgerBuilder(3).
@@ -105,8 +105,8 @@ int main()
       addLettuce().
       addTomato().
       build();
-  // Output: 3 patties, cheese, pepperoni, lettuce, tomato
   burger2->getDescription();
+  // Output: 3 patties, cheese, pepperoni, lettuce, tomato
 
   return 0;
 }

@@ -99,10 +99,10 @@ int main()
   About about(darkTheme);
   Careers careers(darkTheme);
 
-  // Output: About page in dark palette
   std::cout << about.getContent() << std::endl;
-  // Output: Careers page in dark palette
+  // Output: About page in dark palette
   std::cout << careers.getContent() << std::endl;
+  // Output: Careers page in dark palette
 
   return 0;
 }

@@ -46,18 +46,18 @@ int main()
   // Make a door with dimensions 100x200.
   std::shared_ptr<Door> door = DoorFactory::makeDoor(100, 200);
 
-  // Output: width = 100
   std::cout << "width = " << door->getWidth() << std::endl;
-  // Output: height = 200
+  // Output: width = 100
   std::cout << "height = " << door->getHeight() << std::endl;
+  // Output: height = 200
 
   // We can use the factory again to make a door with dimensions 50x100.
   std::shared_ptr<Door> door2 = DoorFactory::makeDoor(50, 100);
 
-  // Output: width = 50
   std::cout << "width = " << door2->getWidth() << std::endl;
-  // Output: height = 100
+  // Output: width = 50
   std::cout << "height = " << door2->getHeight() << std::endl;
+  // Output: height = 100
 
   return 0;
 }

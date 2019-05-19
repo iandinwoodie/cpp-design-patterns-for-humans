@@ -83,6 +83,11 @@ int main()
 
   // Serve the customers.
   shop.serve(); 
+  // Output: (Note: Since the map is unordered, the serving order may vary.)
+  // Serving tea to table 4
+  // Serving tea to table 5
+  // Serving tea to table 1
+  // Serving tea to table 2
 
   return 0;
 }

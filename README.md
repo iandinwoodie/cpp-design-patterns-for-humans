@@ -155,18 +155,18 @@ Here is how this can be used:
 // Make a door with dimensions 100x200.
 std::shared_ptr<Door> door = DoorFactory::makeDoor(100, 200);
 
-// Output: width = 100
 std::cout << "width = " << door->getWidth() << std::endl;
-// Output: height = 200
+// Output: width = 100
 std::cout << "height = " << door->getHeight() << std::endl;
+// Output: height = 200
 
 // We can use the factory again to make a door with dimensions 50x100.
 std::shared_ptr<Door> door2 = DoorFactory::makeDoor(50, 100);
 
-// Output: width = 50
 std::cout << "width = " << door2->getWidth() << std::endl;
-// Output: height = 100
+// Output: width = 50
 std::cout << "height = " << door2->getHeight() << std::endl;
+// Output: height = 100
 ```
 
 #### When To Use
@@ -583,8 +583,8 @@ std::shared_ptr<Burger> burger = BurgerBuilder(2).
     addLettuce().
     addTomato().
     build();
-// Output: 2 patties, pepperoni, lettuce, tomato
 burger->getDescription();
+// Output: 2 patties, pepperoni, lettuce, tomato
 
 // One triple patty buger with everything.
 std::shared_ptr<Burger> burger2 = BurgerBuilder(3).
@@ -593,8 +593,8 @@ std::shared_ptr<Burger> burger2 = BurgerBuilder(3).
     addLettuce().
     addTomato().
     build();
-// Output: 3 patties, cheese, pepperoni, lettuce, tomato
 burger2->getDescription();
+// Output: 3 patties, cheese, pepperoni, lettuce, tomato
 ```
 
 #### When To Use
@@ -1029,10 +1029,10 @@ std::shared_ptr<Theme> darkTheme = std::make_shared<DarkTheme>();
 About about(darkTheme);
 Careers careers(darkTheme);
 
-// Output: About page in dark palette
 std::cout << about.getContent() << std::endl;
-// Output: Careers page in dark palette
+// Output: About page in dark palette
 std::cout << careers.getContent() << std::endl;
+// Output: Careers page in dark palette
 ```
 
 #### When To Use
@@ -1320,28 +1320,28 @@ Here is how this can be used:
 
 ```cpp
 std::shared_ptr<Coffee> simple = std::make_shared<SimpleCoffee>();
-// Output: 3
 std::cout << simple->getPrice() << std::endl;
-// Output: Simple coffee
+// Output: 3
 std::cout << simple->getDescription() << std::endl;
+// Output: Simple coffee
 
 std::shared_ptr<Coffee> milk = std::make_shared<MilkCoffee>(simple);
-// Output: 3.5
 std::cout << milk->getPrice() << std::endl;
-// Output: Simple coffee, milk
+// Output: 3.5
 std::cout << milk->getDescription() << std::endl;
+// Output: Simple coffee, milk
 
 std::shared_ptr<Coffee> whip = std::make_shared<WhipCoffee>(milk);
-// Output: 5.5
 std::cout << whip->getPrice() << std::endl;
-// Output: Simple coffee, milk, whip
+// Output: 5.5
 std::cout << whip->getDescription() << std::endl;
+// Output: Simple coffee, milk, whip
 
 std::shared_ptr<Coffee> vanilla = std::make_shared<VanillaCoffee>(whip);
-// Output: 6.5
 std::cout << vanilla->getPrice() << std::endl;
-// Output: Simple coffee, milk, whip, vanilla
+// Output: 6.5
 std::cout << vanilla->getDescription() << std::endl;
+// Output: Simple coffee, milk, whip, vanilla
 ```
 
 #### When To Use
@@ -1437,16 +1437,16 @@ Here is how this can be used:
 std::shared_ptr<Computer> computer = std::make_shared<Computer>();
 ComputerFacade facade(computer);
 
+facade.turnOn();
 // Output:
 // Beep!
 // Loading...
 // Ready to use!
-facade.turnOn();
 
+facade.turnOff();
 // Output:
 // Closing all programs!
 // Zzz
-facade.turnOff();
 ```
 
 #### When To Use
@@ -1568,6 +1568,11 @@ std::cout << shop.getPreferenceCount() << std::endl; // Output: 3
 
 // Serve the customers.
 shop.serve(); 
+// Output: (Note: Since the map is unordered, the serving order may vary.)
+// Serving tea to table 4
+// Serving tea to table 5
+// Serving tea to table 1
+// Serving tea to table 2
 ```
 
 #### When To Use
