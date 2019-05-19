@@ -76,7 +76,7 @@ int main()
   // We are going to create the chain: bank->paypal->bitcoin.
   
   // First, create the accounts.
-  std::shared_ptr<Account> bank = std::make_shared<Bank>(100);
+  std::shared_ptr<Bank> bank = std::make_shared<Bank>(100);
   std::shared_ptr<Paypal> paypal = std::make_shared<Paypal>(200);
   std::shared_ptr<Bitcoin> bitcoin = std::make_shared<Bitcoin>(300);
 
