@@ -895,7 +895,7 @@ hunter.hunt(wildDogAdapter); // Output: *wild dog bark*
 
 #### When To Use
 
-TODO
+When you need to make an object compatible with the interface of another class.
 
 ### 🚡 Bridge
 
