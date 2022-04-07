@@ -1039,7 +1039,9 @@ std::cout << careers.getContent() << std::endl;
 
 #### When To Use
 
-TODO
+When you need to implement several variants of some functionality for a class,
+you find yourself extending a class in competing ways, or you need to allow
+switching between implementations at runtime.
 
 ### 🌿 Composite
 
