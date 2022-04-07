@@ -748,7 +748,7 @@ assert(&president1 == &president2);
 
 #### When To Use
 
-TODO
+When exactly one object is needed to coordinate actions across a system.
 
 ## Structural Design Patterns
 
